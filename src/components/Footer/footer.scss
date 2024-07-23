@@ -1,0 +1,134 @@
+footer {
+    box-shadow: 0 3px 10px 0 #c9c9c9;
+
+    .top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 5%;
+        height: 280px;
+
+        > div {
+            height: 200px;
+
+            &.intro {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 15px;
+                width: 35%;
+
+                img {
+                    margin-bottom: 0px;
+                }
+
+                p span {
+                    font-weight: 500;
+
+                    .mail { color: $green-dark; }
+                }
+            }
+
+            &.links {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: flex-start;
+                width: fit-content;
+                padding: 20px 30px 0 60px;
+
+                h5 {
+                    font-family: var(--poppins);
+                    font-weight: 600;
+                    font-size: 20px;
+                }
+
+                ul {
+                    padding: 0;
+
+                    li {
+                        list-style: none;
+                        margin-bottom: 4px;
+                    }
+                }
+            }
+        }
+    }
+
+    .bottom {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+        color: $light;
+        background: $main-gradient;
+
+        p {
+            text-align: center;
+        }
+    }
+
+    @include W(1300px) {
+        .top {
+            justify-content: space-between;
+
+            > div {
+                &.intro {
+                    width: 30%;
+                }
+                &.links {
+                    padding: 50px 20px 0 20px;
+                }
+            }
+        }
+    }
+
+    @include W(1000px) {
+        .top {
+            flex-direction: column;
+            height: fit-content;
+
+            > div {
+                &.intro {
+                    width: 100%;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    margin-bottom: 30px;
+                    margin-top: 10px;
+
+                    p, a {
+                        text-align: center;
+                        width: 70%;
+                    }
+                }
+
+                &.links {
+                    height: 160px;
+                    width: 100%;
+                    align-items: center;
+                    margin: 20px 0;
+                    padding: 0;
+
+                    ul > li {
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+
+    @include W(575px) {
+        .top > div.intro {
+            margin-top: 60px;
+
+            p, a {
+                width: 100%;
+            }
+        }
+
+        .bottom {
+            padding: 20px;
+        }
+    }
+}

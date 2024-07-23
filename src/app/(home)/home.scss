@@ -1,0 +1,101 @@
+#home {
+    .search-container {
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+        margin: 30px auto;
+
+        h1 {
+            font-size: 44px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 5px;
+            color: $lighter-dark;
+            text-shadow: 0 0 2px #505050;
+        }
+
+        p {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--poppins);
+            font-size: 20px;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 20px;
+
+            img {
+                margin: 0 5px;
+            }
+        }
+    }
+
+    .marketplace {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        margin-top: 100px;
+
+        .category {
+            h2 {
+                font-weight: 700;
+                padding-bottom: 5px;
+                font-size: 34px;
+                border-bottom: 2px solid $border;
+                margin-bottom: 20px;
+                color: $mdark;
+            }
+
+            .list {
+                width: 100%;
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+                gap: 20px;
+                padding: 10px 0;
+            }
+        }
+
+        .banner {
+            position: relative;
+            padding: 15px;
+            margin-bottom: 30px;
+
+            &::before {
+                content: "";
+                z-index: 0;
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                margin: auto;
+                height: calc(100% - 6px);
+                width: calc(100% - 6px);
+                background: $main-gradient;
+                border-radius: 32px;
+            }
+
+            .content {
+                position: relative;
+                background: $light;
+                z-index: 2;
+                padding: 20px;
+                border-radius: 20px;
+                box-shadow:
+                    0 0 6px 1px #00000030,
+                    inset 0 0 3px 2px #00000030;
+
+                h4 {
+                    font-size: 30px;
+                    font-weight: 700;
+                    color: $green-dark;
+                }
+
+                p {
+                    font-size: 20px;
+                    margin-top: 20px;
+                }
+            }
+        }
+    }
+}

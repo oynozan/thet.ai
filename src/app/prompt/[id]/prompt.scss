@@ -1,0 +1,127 @@
+#prompt-page {
+    display: flex;
+    gap: 20px;
+    width: 70%;
+    margin: 70px auto;
+
+    .side {
+        position: relative;
+
+        img {
+            position: sticky;
+            top: 20px;
+            border-radius: 15px;
+            margin-top: 25px;
+        }
+
+        .editor-wrapper {
+            width: 512px;
+            min-width: 512px;
+            height: 100%;
+            min-height: 512px;
+            position: sticky;
+            top: 20px;
+        }
+    }
+
+    .text {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+
+        .top {
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 5px;
+            width: 100%;
+
+            h1 {
+                font-size: 36px;
+                font-weight: 700;
+                margin-right: 10px;
+            }
+
+            span {
+                font-size: 14px;
+                color: $main;
+                white-space: nowrap;
+            }
+        }
+
+        > p {
+            margin-top: 10px;
+            font-size: 18px;
+            font-family: var(--poppins);
+        }
+
+        > h4 {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 40px;
+
+            span {
+                font-size: 15px;
+                font-weight: 400;
+                font-family: var(--poppins);
+                color: $gray;
+            }
+        }
+
+        .prompt-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border-radius: 15px;
+            background: rgba(0, 0, 0, .05);
+            padding: 15px;
+            margin-top: 10px;
+            transition: 200ms;
+
+            &:hover {
+                background: rgba(0, 0, 0, .1);
+            }
+
+            p {
+                font-weight: 500;
+
+                span {
+                    font-weight: 400;
+                }
+            }
+        }
+
+        .actions {
+            flex: 1;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            padding-bottom: 10px;
+            
+            .price {
+                display: flex;
+                align-content: center;
+                gap: 5px;
+                color: $dark;
+                font-size: 23px;
+                font-weight: 600;
+                margin-bottom: 10px;
+    
+                span {
+                    color: $second;
+                    font-weight: 600;
+                }
+            }
+
+            button {
+                font-size: 25px;
+                font-weight: 600;
+                padding: 14px 40px;
+            }
+        }
+    }
+}

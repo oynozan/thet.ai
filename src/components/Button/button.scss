@@ -1,0 +1,73 @@
+.button {
+    padding: 8px 20px;
+    border-radius: 7px;
+    font-size: 17px;
+
+    &.main {
+        position: relative;
+        background: $main-gradient;
+        color: #fff;
+        font-weight: 500;
+
+        &::before {
+            content: '';
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            border-radius: 14px;
+            transition: 200ms;
+            background-color: transparent;
+        }
+
+        &:hover::before {
+            background-color: rgba(0, 0, 0, .1);
+        }
+
+        > span {
+            position: relative;
+            z-index: 2;
+        }
+    }
+
+    &.blue {
+        position: relative;
+        background: linear-gradient(20deg, $main, $second);
+        color: #fff;
+        font-weight: 500;
+
+        &::before {
+            content: '';
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            border-radius: 14px;
+            transition: 200ms;
+            background-color: transparent;
+        }
+
+        &:hover::before {
+            background-color: rgba(0, 0, 0, .1);
+        }
+
+        > span {
+            position: relative;
+            z-index: 2;
+        }
+    }
+
+    &.light {
+        background: transparent;
+        color: $light;
+        border: 1px solid $border;
+
+        &:hover {
+            background: #ffffff10;
+        }
+    }
+}

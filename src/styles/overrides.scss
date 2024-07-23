@@ -1,0 +1,58 @@
+.toast-container {
+    > div > div {
+        position: relative;
+        background: transparent;
+        border-radius: 17px;
+        padding: 10px 10px 10px 15px;
+        box-shadow:
+            0 0 6px 1px #00000030,
+            inset 0 0 3px 2px #00000030;
+
+        &::before {
+            content: "";
+            z-index: 1;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            margin: auto;
+            height: calc(100% - 10px);
+            width: calc(100% - 10px);
+            background: $light;
+            border-radius: 12px;
+        }
+
+        &::after {
+            content: "";
+            z-index: 0;
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+            background: $main-gradient;
+            border-radius: 17px;
+        }
+
+        > * {
+            position: relative;
+            z-index: 3;
+        }
+    }
+}
+
+// Monaco Editor
+.monaco-editor {
+    border-radius: 12px;
+
+    .overflow-guard {
+        border: 1px solid $border;
+        box-shadow: 0 0 10px 2px #00000010;
+        border-radius: 12px;
+    }
+
+    .minimap.slider-mouseover {
+        display: none;
+    }
+}

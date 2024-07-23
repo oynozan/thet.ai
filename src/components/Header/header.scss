@@ -1,0 +1,74 @@
+header {
+    display: flex;
+    align-items: center;
+    height: 70px;
+    padding: 20px 15px;
+    box-shadow: 0 -3px 10px 0 #c9c9c9;
+
+    .links {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        padding: 0 40px;
+        gap: 24px;
+
+        a {
+            color: $gray;
+            transition: 100ms;
+            font-size: 16px;
+
+            &:hover {
+                color: $dark;
+            }
+
+            &:nth-child(3) {
+                font-weight: 500;
+                color: $gold;
+            }
+
+            &:last-child {
+                font-weight: 500;
+                color: $green-dark;
+            }
+        }
+    }
+
+    .actions {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+
+        .searchbar {
+            width: 360px;
+            border-radius: 7px;
+
+            input {
+                font-size: 15px;
+                height: 36px;
+                padding-left: 28px;
+            }
+
+            > svg {
+                font-size: 15px;
+                left: 6px;
+            }
+        }
+    }
+
+    .mobile {
+        display: none;
+    }
+
+    @include W(910px) {
+        justify-content: space-between;
+
+        .actions,
+        .links {
+            display: none;
+        }
+
+        .mobile {
+            display: flex;
+        }
+    }
+}

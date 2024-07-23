@@ -1,0 +1,166 @@
+@import 'overrides';
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    color: $dark;
+    font-size: 17px;
+    font-family: var(--inter), sans-serif;
+    background: $light;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    font-weight: 600;
+    color: $light-dark;
+}
+
+p {
+    margin: 0;
+}
+
+b {
+    font-weight: 600;
+}
+
+button {
+    font-family: var(--inter);
+    border: none;
+    outline: none;
+    transition: 200ms;
+    cursor: pointer;
+}
+
+a {
+    color: $main;
+    font-family: var(--inter);
+    text-decoration: none;
+    transition: 200ms;
+    cursor: pointer;
+
+    &:hover {
+        color: $second;
+    }
+}
+
+input,
+textarea {
+    font-family: var(--poppins);
+    outline: none;
+    transition: 200ms;
+    background: #fff;
+    border: 1px solid $light-50;
+    color: $dark;
+    border-radius: 7px;
+    padding: 4px 10px;
+    font-size: 16px;
+
+    &::placeholder {
+        color: $gray;
+    }
+}
+
+$main-h: calc(100dvh - 330px - 70px);
+
+main {
+    min-height: $main-h;
+    padding: 20px 40px;
+
+    @include W(768px) {
+        padding: 10px 20px 20px 20px;
+    }
+}
+
+.loader {
+    transition: 200ms;
+    animation-name: loader;
+    animation-duration: 1000ms;
+    animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+    animation-iteration-count: infinite;
+}
+
+@keyframes loader {
+    0% { scale: 1; }
+    25% { scale: 1.2; }
+    50% { scale: 1; }
+    75% { scale: 1.2; }
+    100% { scale: 1; }
+}
+
+// Not Found page
+.not-found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: $main-h;
+    padding: 10px;
+
+    .idk {
+        font-size: 100px;
+        white-space: nowrap;
+
+        @include W(768px) {
+            font-size: 16vw;
+        }
+    }
+
+    span {
+        display: block;
+        margin-top: 20px;
+        font-size: 20px;
+        text-align: center;
+    }
+}
+
+#scroll-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background: $main-gradient;
+    z-index: 999;
+
+    svg {
+        font-size: 23px;
+        color: #fff;
+    }
+}
+
+::selection {
+    background: $main-10;
+}
+
+// Scrollbar
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+::-webkit-scrollbar-track {
+    background: $light-dark;
+}
+::-webkit-scrollbar-thumb {
+    background: $main;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: $second;
+}

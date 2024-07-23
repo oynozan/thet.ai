@@ -1,0 +1,127 @@
+.listing {
+    border-radius: 12px;
+    overflow: hidden;
+
+    &:hover {
+        background-color: #efefef;
+
+        .image::after {
+            box-shadow: inset 0 0 20px 15px #00000050;
+        }
+    }
+
+    .image {
+        position: relative;
+        display: flex;
+        align-items: center;
+        background-position: center;
+        height: 260px;
+        border-radius: 15px 15px 0 0;
+
+        &::after {
+            content: "";
+            position: absolute;
+            transition: 200ms;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            box-shadow: inset 0 0 20px 10px #00000060;
+            border-radius: 15px 15px 0 0;
+        }
+    }
+
+    .text-preview {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: $green-dark;
+        color: $dark;
+        padding: 20px;
+        height: 260px;
+
+        &::after {
+            content: "";
+            position: absolute;
+            transition: 200ms;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            box-shadow: inset 0 0 20px 10px #00000060;
+            border-radius: 15px 15px 0 0;
+        }
+
+        p {
+            text-align: center;
+            line-height: 20px;
+            max-height: 140px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 7;
+            -webkit-box-orient: vertical;
+        }
+    }
+
+    .text {
+        padding: 10px;
+        border-left: 1px solid $border;
+        border-right: 1px solid $border;
+        width: 100%;
+
+        h3 {
+            font-size: 19px;
+            font-weight: 700;
+            width: 100%;
+            max-width: 100%;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        p {
+            font-size: 15px;
+            line-height: 20px;
+            margin-top: 10px;
+            color: $gray;
+            height: 40px;
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+    }
+
+    .info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 10px 10px 10px;
+        border: 1px solid $border;
+        border-top: none;
+        border-radius: 0 0 15px 15px;
+
+        .price {
+            display: flex;
+            align-content: center;
+            gap: 5px;
+            color: $dark;
+
+            span {
+                color: $second;
+                font-weight: 600;
+            }
+        }
+
+        .model {
+            font-size: 14px;
+            color: $main;
+        }
+    }
+}
