@@ -20,7 +20,8 @@ export default async function PromptPage({ params }: { params: { id: string } })
         <div id="prompt-page">
             {type === "Stable Diffusion XL Turbo" && (
                 <div className="side">
-                    <img src={listing.preview} />
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={listing.preview} alt="Prompt Preview" />
                 </div>
             )}
             {GPTModels.includes(type as (typeof GPTModels)[number]) && (
