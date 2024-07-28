@@ -1,14 +1,14 @@
 import GetListing from "@/actions/listing/GetListing";
-import { GPTModels } from '@/data/PromptTypes';
-import { Editor } from '@monaco-editor/react';
+import { GPTModels } from "@/data/PromptTypes";
+import { Editor } from "@monaco-editor/react";
 import TFUEL from "@/components/Coins/TFUEL";
 import { formatDate } from "@/lib/helpers";
-import Button from '@/components/Button';
+import Button from "@/components/Button";
 import TPR from "@/components/Coins/TPR";
 import NotFound from "@/app/not-found";
 
 import "./prompt.scss";
-import EditorWrapper from '@/components/EditorWrapper';
+import EditorWrapper from "@/components/EditorWrapper";
 
 export default async function PromptPage({ params }: { params: { id: string } }) {
     const listing = await GetListing(params.id);
@@ -61,9 +61,7 @@ export default async function PromptPage({ params }: { params: { id: string } })
                         {listing.currency === "TPR" ? <TPR size={24} /> : <TFUEL size={24} />}
                     </div>
 
-                    <Button type="main">
-                        Buy
-                    </Button>
+                    <Button type="main">Buy</Button>
                 </div>
             </div>
         </div>

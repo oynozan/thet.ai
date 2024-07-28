@@ -21,6 +21,6 @@ export default async function GetListing(id: string): Promise<any> {
         currency: prompt.currency,
         preview: prompt.preview,
         sales: prompt.sales,
-        date: prompt.date
+        date: prompt.date,
     };
 }

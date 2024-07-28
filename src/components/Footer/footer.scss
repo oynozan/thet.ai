@@ -25,7 +25,9 @@ footer {
                 p span {
                     font-weight: 500;
 
-                    .mail { color: $green-dark; }
+                    .mail {
+                        color: $green-dark;
+                    }
                 }
             }
 
@@ -97,7 +99,8 @@ footer {
                     margin-bottom: 30px;
                     margin-top: 10px;
 
-                    p, a {
+                    p,
+                    a {
                         text-align: center;
                         width: 70%;
                     }
@@ -122,7 +125,8 @@ footer {
         .top > div.intro {
             margin-top: 60px;
 
-            p, a {
+            p,
+            a {
                 width: 100%;
             }
         }

@@ -5,13 +5,9 @@ export default function Swap() {
         <div id="swap-container">
             <SwapComponent />
         </div>
-    )
+    );
 }
 
 export function SwapComponent() {
-    return (
-        <div>
-
-        </div>
-    )
+    return <div></div>;
 }

@@ -3,9 +3,5 @@ export default function ProfileLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    return (
-        <div id="profile">
-            {children}
-        </div>
-    )
+    return <div id="profile">{children}</div>;
 }

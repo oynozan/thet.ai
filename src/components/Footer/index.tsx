@@ -12,9 +12,8 @@ export default function Footer() {
                         <Image src="/logo.png" alt="thet.ai Logo" height={100} width={100} />
                     </Link>
                     <p>
-                        <Link href="/">thet.ai</Link> is a prompt market running on{" "}
-                        <span>THETA</span> network. Sell & buy prompts with <span>TPR</span> and{" "}
-                        <span>TFUEL</span>.
+                        <Link href="/">thet.ai</Link> is a prompt market running on <span>THETA</span>{" "}
+                        network. Sell & buy prompts with <span>TPR</span> and <span>TFUEL</span>.
                         <br />
                         <span>
                             Contact us at{" "}
@@ -31,7 +30,7 @@ export default function Footer() {
                             <Link href="/">Home</Link>
                         </li>
                         <li>
-                            <Link href="/swap">Buy TPR</Link>
+                            <Link href="/faucet">Faucet</Link>
                         </li>
                         <li>
                             <Link href="/whitepaper">Whitepaper</Link>

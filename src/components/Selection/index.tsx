@@ -96,10 +96,7 @@ export default function Selection({
                     let itemLower = item?.toLocaleLowerCase(),
                         filterLower = filter?.toLocaleLowerCase();
 
-                    if (
-                        !filter ||
-                        (itemLower.includes(filterLower) && !itemLower.startsWith(filterLower))
-                    )
+                    if (!filter || (itemLower.includes(filterLower) && !itemLower.startsWith(filterLower)))
                         return <Item key={i} item={item} set={setVisible} click={click} />;
                     return <></>;
                 })}

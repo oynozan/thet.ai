@@ -2,22 +2,16 @@
 
 import { cookies } from "next/headers";
 import { verifyMessage } from "ethers";
-import GetUser from './GetUser';
-import AddUser from './AddUser';
+import GetUser from "./GetUser";
+import AddUser from "./AddUser";
 
-export default async function ValidateSignature(
-    wallet: string,
-    raw_signature?: string,
-): Promise<boolean> {
+export default async function ValidateSignature(wallet: string, raw_signature?: string): Promise<boolean> {
     const signature = cookies().get("signature")?.value;
 
     if (!signature && !raw_signature) return false;
 
     const finalSignature = (raw_signature ?? signature) as string;
-    const signerAddress = verifyMessage(
-        "Welcome to thet.ai - The P2P Prompt Marketplace",
-        finalSignature,
-    );
+    const signerAddress = verifyMessage("Welcome to thet.ai - The P2P Prompt Marketplace", finalSignature);
 
     if (signerAddress.toLowerCase() !== wallet.toLowerCase()) return false;
 

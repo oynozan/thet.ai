@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-import type { IWallet } from './wallet';
+import type { IWallet } from "./wallet";
 
 /* Modal States */
 interface ModalStore {
@@ -11,20 +11,21 @@ interface ModalStore {
     setLoading: (loading: boolean) => void;
 }
 
-export const useModalStore = create<ModalStore>((set) => ({
+export const useModalStore = create<ModalStore>(set => ({
     modal: "", // Modal Key
     options: {},
     loading: false,
-    setModal: (type, options = {}) => set(() => ({
-        modal: type,
-        options: options,
-    })),
-    setLoading: (loading) => set(() => ({ loading }))
+    setModal: (type, options = {}) =>
+        set(() => ({
+            modal: type,
+            options: options,
+        })),
+    setLoading: loading => set(() => ({ loading })),
 }));
 
 /* Wallet States */
 interface IWalletStore {
-    loading: boolean,
+    loading: boolean;
     wallet: string | null;
     handler: IWallet | null;
     setWallet: (w: string) => void;
@@ -47,31 +48,31 @@ interface IUser {
     confirmed: boolean;
     history: Array<{
         sold?: {
-            id: string,
-            amount: number,
-            currency: string,
-            date: Date
-        },
+            id: string;
+            amount: number;
+            currency: string;
+            date: Date;
+        };
         bought?: {
-            id: string,
-            amount: number,
-            currency: string,
-            date: Date
-        },
+            id: string;
+            amount: number;
+            currency: string;
+            date: Date;
+        };
         swapped?: {
-            amount: number,
-            direction: string,
-            date: Date
-        },
+            amount: number;
+            direction: string;
+            date: Date;
+        };
         preview?: {
-            model: string,
-            date: Date
-        },
-    }>
+            model: string;
+            date: Date;
+        };
+    }>;
 }
 
 interface IUserStore {
-    user: IUser | null,
+    user: IUser | null;
     setUser: (user: IUser) => void;
 }
 

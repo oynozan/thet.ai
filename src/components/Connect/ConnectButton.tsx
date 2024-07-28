@@ -8,7 +8,7 @@ import { Wallet } from "@/lib/wallet";
 import { useUserStore, useWalletStore } from "@/lib/states";
 import { truncateWalletAddress } from "@/lib/helpers";
 import ValidateSignature from "@/actions/auth/ValidateSignature";
-import GetUser from '@/actions/auth/GetUser';
+import GetUser from "@/actions/auth/GetUser";
 
 export default function ConnectButton({
     children,
@@ -38,7 +38,7 @@ export default function ConnectButton({
         const finalize = () => {
             setLoading(false);
             clearInterval(interval);
-        }
+        };
 
         const interval = setInterval(async () => {
             const accounts = await handler.accounts();
@@ -57,10 +57,10 @@ export default function ConnectButton({
 
     useEffect(() => {
         if (wallet) {
-            (async() => {
+            (async () => {
                 const user = await GetUser(wallet);
                 if (user) setUser(user);
-            })()
+            })();
         }
     }, [wallet]);
 
@@ -75,9 +75,7 @@ export default function ConnectButton({
         // Get signature
         let signature;
         try {
-            signature = await handler.signMessage(
-                "Welcome to thet.ai - The P2P Prompt Marketplace",
-            );
+            signature = await handler.signMessage("Welcome to thet.ai - The P2P Prompt Marketplace");
             if (!signature) return toast.error("You have to sign the message in order to sign in");
         } catch (e) {
             return toast.error("You have to sign the message in order to sign in");
@@ -90,27 +88,24 @@ export default function ConnectButton({
         else toast.error("Your signature cannot be validated, please try again");
     }
 
-    if (loading) return <></>
+    if (loading) return <></>;
 
     return (
         <>
-        {wallet ? (
-            <Button
-                type="main"
-                href='/profile'
-            >
-                {truncateWalletAddress(wallet)}
-            </Button>
-        ) : (
-            <Button
-                type="main"
-                click={() => {
-                    if (!wallet) connect();
-                }}
-            >
-                {children ?? "Connect Wallet"}
-            </Button>
-        )}
+            {wallet ? (
+                <Button type="main" href="/profile">
+                    {truncateWalletAddress(wallet)}
+                </Button>
+            ) : (
+                <Button
+                    type="main"
+                    click={() => {
+                        if (!wallet) connect();
+                    }}
+                >
+                    {children ?? "Connect Wallet"}
+                </Button>
+            )}
         </>
     );
 }

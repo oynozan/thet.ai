@@ -77,13 +77,13 @@
             flex-direction: column;
             gap: 10px;
             border-radius: 15px;
-            background: rgba(0, 0, 0, .05);
+            background: rgba(0, 0, 0, 0.05);
             padding: 15px;
             margin-top: 10px;
             transition: 200ms;
 
             &:hover {
-                background: rgba(0, 0, 0, .1);
+                background: rgba(0, 0, 0, 0.1);
             }
 
             p {
@@ -101,7 +101,7 @@
             align-items: flex-end;
             justify-content: space-between;
             padding-bottom: 10px;
-            
+
             .price {
                 display: flex;
                 align-content: center;
@@ -110,7 +110,7 @@
                 font-size: 23px;
                 font-weight: 600;
                 margin-bottom: 10px;
-    
+
                 span {
                     color: $second;
                     font-weight: 600;

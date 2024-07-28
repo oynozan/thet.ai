@@ -1,4 +1,4 @@
-@import 'overrides';
+@import "overrides";
 
 * {
     box-sizing: border-box;
@@ -94,11 +94,21 @@ main {
 }
 
 @keyframes loader {
-    0% { scale: 1; }
-    25% { scale: 1.2; }
-    50% { scale: 1; }
-    75% { scale: 1.2; }
-    100% { scale: 1; }
+    0% {
+        scale: 1;
+    }
+    25% {
+        scale: 1.2;
+    }
+    50% {
+        scale: 1;
+    }
+    75% {
+        scale: 1.2;
+    }
+    100% {
+        scale: 1;
+    }
 }
 
 // Not Found page

@@ -1,6 +1,6 @@
 "use server";
 
-import connectDB from '@/db/connect';
+import connectDB from "@/db/connect";
 import userDB from "../../db/models/User";
 
 interface IUser {

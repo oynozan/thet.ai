@@ -1,5 +1,5 @@
 import { ethers, formatEther } from "ethers";
-import { withTimeout } from './helpers';
+import { withTimeout } from "./helpers";
 
 export interface IWallet {
     connect(): Promise<string | void>;
@@ -107,7 +107,7 @@ export class Wallet implements IWallet {
             const tx: any = {
                 to,
                 value: ethers.parseEther(value),
-                nonce
+                nonce,
             };
 
             if (message) tx["data"] = ethers.toUtf8Bytes(message);

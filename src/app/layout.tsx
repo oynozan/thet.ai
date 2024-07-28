@@ -6,7 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 import "../styles/main.scss";
-import Wrapper from '@/components/Wrapper';
+import Wrapper from "@/components/Wrapper";
 
 // Fonts
 const inter = Inter({ subsets: ["latin"], variable: "--inter" });

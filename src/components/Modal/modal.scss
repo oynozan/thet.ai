@@ -21,8 +21,12 @@
         max-width: 70vw;
         @include glass;
 
-        @include W(1650px) { max-width: 80vw; }
-        @include W(1030px) { max-width: 90vw; }
+        @include W(1650px) {
+            max-width: 80vw;
+        }
+        @include W(1030px) {
+            max-width: 90vw;
+        }
 
         @include W(768px) {
             max-width: 100%;
@@ -35,7 +39,7 @@
             margin-bottom: 16px;
             text-align: center;
         }
-    
+
         p {
             margin-bottom: 24px;
             font-weight: 500;
@@ -43,32 +47,38 @@
             color: $light;
             text-align: center;
         }
-    
+
         .buttons {
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: space-between;
             margin: 24px auto 0 auto;
-    
+
             @include W(768px) {
                 flex-wrap: wrap;
                 margin: 12px auto 0 auto;
-    
-                button, a {
+
+                button,
+                a {
                     margin: 10px 0 !important;
                 }
             }
-    
-            button, a {
+
+            button,
+            a {
                 width: 100%;
                 white-space: nowrap;
-    
+
                 // Custom
                 padding: 14px 52px;
-    
-                &:first-child { margin-right: 10px; }
-                &:last-child { margin-left: 10px; }
+
+                &:first-child {
+                    margin-right: 10px;
+                }
+                &:last-child {
+                    margin-left: 10px;
+                }
             }
         }
     }

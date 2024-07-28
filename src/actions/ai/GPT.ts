@@ -5,7 +5,7 @@ import type { GPTModels } from "@/data/PromptTypes";
 
 export default async function GPT(
     prompt: string,
-    model: typeof GPTModels[number],
+    model: (typeof GPTModels)[number],
     customization: {
         max_tokens: number;
         temperature: number;
@@ -30,6 +30,6 @@ export default async function GPT(
         return res.choices[0].message;
     } catch (e) {
         console.error(e);
-        return null
+        return null;
     }
 }

@@ -1,8 +1,14 @@
 import { model, models, Schema } from "mongoose";
+import { Networks } from "@/data/Networks";
 
 const userSchema = new Schema({
     wallet: {
         type: String,
+        required: true,
+    },
+    network: {
+        type: String,
+        enum: Networks,
         required: true,
     },
     confirmed: {
@@ -20,7 +26,7 @@ const userSchema = new Schema({
                                 id: String,
                                 amount: Number,
                                 currency: String,
-                                date: Date
+                                date: Date,
                             },
                             { _id: false },
                         ),
@@ -32,7 +38,7 @@ const userSchema = new Schema({
                                 id: String,
                                 amount: Number,
                                 currency: String,
-                                date: Date
+                                date: Date,
                             },
                             { _id: false },
                         ),
@@ -43,7 +49,7 @@ const userSchema = new Schema({
                             {
                                 amount: Number,
                                 direction: String,
-                                date: Date
+                                date: Date,
                             },
                             { _id: false },
                         ),
@@ -53,7 +59,7 @@ const userSchema = new Schema({
                         type: new Schema(
                             {
                                 model: String,
-                                date: Date
+                                date: Date,
                             },
                             { _id: false },
                         ),

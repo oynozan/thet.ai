@@ -10,11 +10,7 @@ export function formatDate(date: Date): string {
 }
 
 // Truncating wallet addresses
-export function truncateWalletAddress(
-    walletAddress: string,
-    prefixLength = 10,
-    suffixLength = 6,
-): string {
+export function truncateWalletAddress(walletAddress: string, prefixLength = 10, suffixLength = 6): string {
     // Check if the wallet address is valid
     if (typeof walletAddress !== "string" || walletAddress.length < prefixLength + suffixLength)
         return walletAddress; // Return the original address if it's invalid or too short

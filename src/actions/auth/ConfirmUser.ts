@@ -2,7 +2,7 @@
 
 import { ethers } from "ethers";
 
-import connectDB from '@/db/connect';
+import connectDB from "@/db/connect";
 import userDB from "../../db/models/User";
 
 export default async function ConfirmUser(wallet: string) {

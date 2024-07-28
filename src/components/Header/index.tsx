@@ -6,7 +6,7 @@ import { IoMenu } from "react-icons/io5";
 import ConnectButton from "../Connect/ConnectButton";
 
 import "./header.scss";
-import Search from '../Search';
+import Search from "../Search";
 
 export default function Header() {
     return (
@@ -18,7 +18,7 @@ export default function Header() {
             <div className="links">
                 <Link href="/">Home</Link>
                 <Link href="/sell">Sell</Link>
-                <Link href="/swap">Buy TPR</Link>
+                <Link href="/faucet">Faucet</Link>
                 <Link href="/faq">FAQ</Link>
                 <Link href="/whitepaper">Whitepaper</Link>
                 <Link href="/sponsors">Sponsors</Link>

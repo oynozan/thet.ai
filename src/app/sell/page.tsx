@@ -21,6 +21,7 @@ import { useUserStore, useWalletStore } from "@/lib/states";
 
 import "./sell.scss";
 import GPT from "@/actions/ai/GPT";
+import { MonacoOptions } from "@/components/EditorWrapper";
 
 const llm_example_prompt = [
     {
@@ -239,7 +240,7 @@ export default function Sell() {
         (previewRef.current as any).scrollIntoView({ behavior: "smooth", block: "start" });
     };
 
-    if (!wallet)
+    if (!wallet && !loading)
         return (
             <div
                 style={{
@@ -310,6 +311,7 @@ export default function Sell() {
                             }}
                             theme="vs-dark"
                             onMount={handleEditorDidMount}
+                            options={MonacoOptions}
                         />
                     </div>
                     <div className="customization">
@@ -606,6 +608,7 @@ export default function Sell() {
                                 defaultLanguage="plaintext"
                                 value={previewMessage}
                                 theme="vs-dark"
+                                options={MonacoOptions}
                             />
                         </div>
                     </div>

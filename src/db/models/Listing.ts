@@ -39,16 +39,16 @@ const listingSchema = new Schema({
     },
     preview: {
         type: String,
-        required: true
+        required: true,
     },
     sales: {
         type: Number,
-        default: 0
+        default: 0,
     },
     date: {
         type: Date,
-        required: true
-    }
+        required: true,
+    },
 });
 
 export default models?.listings || model("listings", listingSchema);
