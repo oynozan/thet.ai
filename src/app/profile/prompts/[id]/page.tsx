@@ -9,7 +9,7 @@ import GPTCustomization from "@/components/Customizations/GPT";
 import SDXLTurboCustomization from "@/components/Customizations/SDXLTurbo";
 
 import "./bought.scss";
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 
 export default function BoughtPrompt({ params }: { params: { id: string } }) {
     const id = params.id;

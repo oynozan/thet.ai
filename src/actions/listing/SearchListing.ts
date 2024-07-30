@@ -1,7 +1,7 @@
 "use server";
 
 import connectDB from "@/db/connect";
-import type { TNetwork } from '@/lib/states';
+import type { TNetwork } from "@/lib/states";
 import listingDB from "../../db/models/Listing";
 
 export default async function SearchListing(query: string, network: TNetwork) {

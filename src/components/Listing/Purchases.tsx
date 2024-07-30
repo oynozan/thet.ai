@@ -22,7 +22,7 @@ export default function Purchases() {
         })();
     }, [wallet, network]);
 
-    if (!items.length) return <p>You don&apos;t have any prompt listings yet.</p>
+    if (!items.length) return <p>You don&apos;t have any prompt listings yet.</p>;
 
     return (
         <div className="list">

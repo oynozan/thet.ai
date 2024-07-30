@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { useSearchParams } from 'next/navigation';
-import { Suspense, useEffect, useState } from 'react';
+import { useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useState } from "react";
 
 import Listing from "@/components/Listing";
-import { useUserStore } from '@/lib/states';
+import { useUserStore } from "@/lib/states";
 import SearchListing from "@/actions/listing/SearchListing";
 
 import "./search.scss";
@@ -14,7 +14,7 @@ export default function SearchPage() {
         <Suspense>
             <SearchContent />
         </Suspense>
-    )
+    );
 }
 
 function SearchContent() {
@@ -28,11 +28,11 @@ function SearchContent() {
     useEffect(() => {
         if (!q || !network) return;
 
-        (async() => {
+        (async () => {
             const raw_listings = await SearchListing(q, network);
             setListings(raw_listings);
-        })()
-    }, [q, network])
+        })();
+    }, [q, network]);
 
     if (!q || typeof q !== "string") return <p>There are no prompts for this search query.</p>;
 
