@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import TPR from "../Coins/TPR";
 import TFUEL from "../Coins/TFUEL";
-import { GPTModels, PromptTypes } from "@/data/PromptTypes";
+import { GPTModels, type TPromptType } from "@/data/PromptTypes";
 
 import "./listing.scss";
 
@@ -14,17 +14,19 @@ export default function Listing({
     preview,
     price,
     currency,
+    customLink,
 }: {
     id: string;
-    type: keyof (typeof PromptTypes)["types"];
+    type: TPromptType;
     title: string;
     description?: string;
     preview: string;
     price: number;
     currency: "TPR" | "TFUEL";
+    customLink?: string;
 }) {
     return (
-        <Link className="listing" href={`/prompt/${id}`}>
+        <Link className="listing" href={customLink || `/prompt/${id}`}>
             {type === "Stable Diffusion XL Turbo" && (
                 <div className="image" style={{ backgroundImage: `url(${preview})` }}></div>
             )}
@@ -39,7 +41,7 @@ export default function Listing({
             </div>
             <div className="info">
                 <div className="price">
-                    <span>{price}</span>
+                    <span>{price.toFixed(2)}</span>
                     {currency} {currency === "TPR" ? <TPR /> : <TFUEL />}
                 </div>
                 <div className="model">{type as string}</div>

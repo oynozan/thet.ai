@@ -1,6 +1,8 @@
 import { create } from "zustand";
 
 import type { IWallet } from "./wallet";
+import type { IUser } from "@/db/models/User";
+import { Networks } from "@/data/Networks";
 
 /* Modal States */
 interface ModalStore {
@@ -43,40 +45,18 @@ export const useWalletStore = create<IWalletStore>(set => ({
 }));
 
 /* User States */
-interface IUser {
-    wallet: string;
-    confirmed: boolean;
-    history: Array<{
-        sold?: {
-            id: string;
-            amount: number;
-            currency: string;
-            date: Date;
-        };
-        bought?: {
-            id: string;
-            amount: number;
-            currency: string;
-            date: Date;
-        };
-        swapped?: {
-            amount: number;
-            direction: string;
-            date: Date;
-        };
-        preview?: {
-            model: string;
-            date: Date;
-        };
-    }>;
-}
+export type TNetwork = (typeof Networks)[number];
 
 interface IUserStore {
     user: IUser | null;
-    setUser: (user: IUser) => void;
+    network: TNetwork | null;
+    setUser: (user: IUser | null) => void;
+    setNetwork: (network: TNetwork) => void;
 }
 
 export const useUserStore = create<IUserStore>(set => ({
     user: null,
+    network: null,
     setUser: user => set(() => ({ user })),
+    setNetwork: network => set(() => ({ network })),
 }));

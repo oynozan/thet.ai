@@ -1,39 +1,15 @@
 "use server";
 
 import connectDB from "@/db/connect";
-import userDB from "../../db/models/User";
+import { TNetwork } from "@/lib/states";
+import userDB, { type IUser } from "../../db/models/User";
 
-interface IUser {
-    wallet: string;
-    confirmed: boolean;
-    lastPreview: Date;
-    history: Array<{
-        sold?: {
-            id: string;
-            amount: number;
-            currency: string;
-            date: Date;
-        };
-        bought?: {
-            id: string;
-            amount: number;
-            currency: string;
-            date: Date;
-        };
-        swapped?: {
-            amount: number;
-            direction: string;
-            date: Date;
-        };
-    }>;
-}
-
-export default async function GetUser(wallet: string): Promise<IUser | null> {
+export default async function GetUser(wallet: string, network: TNetwork): Promise<IUser | null> {
     await connectDB();
 
     const user = (await userDB
         .findOne(
-            { wallet },
+            { wallet, network },
             {
                 _id: 0,
                 wallet: 1,

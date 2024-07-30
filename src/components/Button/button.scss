@@ -6,7 +6,7 @@
     &.main {
         position: relative;
         background: $main-gradient;
-        color: #fff;
+        color: #fff !important;
         font-weight: 500;
 
         &::before {
@@ -35,7 +35,7 @@
     &.blue {
         position: relative;
         background: linear-gradient(20deg, $main, $second);
-        color: #fff;
+        color: #fff !important;
         font-weight: 500;
 
         &::before {
@@ -53,6 +53,36 @@
 
         &:hover::before {
             background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        > span {
+            position: relative;
+            z-index: 2;
+        }
+    }
+
+    &.red {
+        width: fit-content;
+        position: relative;
+        background: linear-gradient(20deg, rgb(184, 13, 13), rgb(147, 3, 3));
+        color: #fff !important;
+        font-weight: 500;
+
+        &::before {
+            content: "";
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            border-radius: 14px;
+            transition: 200ms;
+            background-color: transparent;
+        }
+
+        &:hover::before {
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
         > span {

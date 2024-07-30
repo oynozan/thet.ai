@@ -1,20 +1,19 @@
 "use server";
 
 import connectDB from "@/db/connect";
+import { TNetwork } from "@/lib/states";
 import listingDB from "@/db/models/Listing";
-import { GPTModels, PromptTypes } from "@/data/PromptTypes";
+import { GPTModels, type TPromptType } from "@/data/PromptTypes";
 
-type promptType = keyof (typeof PromptTypes)["types"];
-
-export default async function GetMostRecentPrompts(n: number = 10, type?: promptType | Array<promptType>) {
+export default async function GetMostRecentPrompts(network: TNetwork, n: number = 10, type?: TPromptType) {
     await connectDB();
 
-    const query: any = [{ $sort: { date: -1 } }, { $limit: n }];
+    const query: any = [{ $match: { network } }, { $sort: { date: -1 } }, { $limit: n }];
 
     if (type && typeof type === "string") {
-        query.unshift({ $match: { type } });
+        query[0].$match["type"] = type;
     } else if (type && typeof type === "object") {
-        query.unshift({ $match: { type: { $in: GPTModels } } });
+        query[0].$match["type"] = { $in: GPTModels };
     }
 
     // Get most recent n entries

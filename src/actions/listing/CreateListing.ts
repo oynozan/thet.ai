@@ -3,13 +3,17 @@
 import { ethers } from "ethers";
 
 import connectDB from "@/db/connect";
+import userDB from "../../db/models/User";
+import type { TNetwork } from "@/lib/states";
 import listingDB from "../../db/models/Listing";
-import { PromptTypes } from "@/data/PromptTypes";
+import type { TPromptType } from "@/data/PromptTypes";
+import ValidateSignature from "../auth/ValidateSignature";
 
 export default async function CreateListing(
     wallet: string,
+    network: TNetwork,
     prompt: string,
-    type: keyof (typeof PromptTypes)["types"],
+    type: TPromptType,
     title: string,
     description: string,
     amount: number,
@@ -21,7 +25,15 @@ export default async function CreateListing(
     // TODO: Implement zod validation (https://zod.dev/)
     await connectDB();
 
-    const provider = new ethers.JsonRpcProvider("https://eth-rpc-api.thetatoken.org/rpc");
+    const validation = await ValidateSignature(wallet, network);
+    if (!validation) return { error: "Invalid user" };
+
+    const rpcURL =
+        network === "Theta Mainnet"
+            ? "https://eth-rpc-api.thetatoken.org/rpc"
+            : "https://eth-rpc-api-testnet.thetatoken.org/rpc";
+
+    const provider = new ethers.JsonRpcProvider(rpcURL);
 
     if (!prompt || prompt.length > 5000) return { error: "Invalid prompt" };
     if (description && description.length > 1000) return { error: "Invalid description" };
@@ -54,9 +66,11 @@ export default async function CreateListing(
 
     console.log(expectedMessage);
 
+    // Add listing to DB
     const newListing = new listingDB({
         tx: txHash,
         wallet,
+        network,
         prompt,
         type,
         title,
@@ -70,5 +84,7 @@ export default async function CreateListing(
 
     await newListing.save();
 
-    return { id: newListing._id.toString() };
+    const ID = newListing._id.toString();
+
+    return { id: ID };
 }

@@ -1,10 +1,11 @@
 "use server";
 
 import userDB from "../../db/models/User";
+import type { TNetwork } from "@/lib/states";
 
-export default async function AddUser(wallet: string) {
+export default async function AddUser(wallet: string, network: TNetwork) {
     try {
-        const obj = { wallet };
+        const obj = { wallet, network };
         const newUser = new userDB(obj);
         await newUser.save();
 

@@ -33,9 +33,6 @@ export default function Footer() {
                             <Link href="/faucet">Faucet</Link>
                         </li>
                         <li>
-                            <Link href="/whitepaper">Whitepaper</Link>
-                        </li>
-                        <li>
                             <Link href="/sell">Sell</Link>
                         </li>
                     </ul>

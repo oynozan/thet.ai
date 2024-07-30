@@ -1,5 +1,7 @@
 import { model, models, Schema } from "mongoose";
 
+import { Networks } from "@/data/Networks";
+
 const listingSchema = new Schema({
     tx: {
         type: String,
@@ -7,6 +9,11 @@ const listingSchema = new Schema({
     },
     wallet: {
         type: String,
+        required: true,
+    },
+    network: {
+        type: String,
+        enum: Networks,
         required: true,
     },
     prompt: {

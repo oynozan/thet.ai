@@ -8,20 +8,22 @@ import Editor, { type Monaco } from "@monaco-editor/react";
 import { BsChevronDown } from "react-icons/bs";
 import { LiaRobotSolid } from "react-icons/lia";
 
+import GPT from "@/actions/ai/GPT";
 import Loader from "@/components/Loader";
 import Button from "@/components/Button";
 import TPR from "@/components/Coins/TPR";
 import TFUEL from "@/components/Coins/TFUEL";
 import Selection from "@/components/Selection";
 import SDXLTurbo from "@/actions/ai/SDXLTurbo";
-import { GPTModels, PromptTypes } from "@/data/PromptTypes";
 import ConfirmUser from "@/actions/auth/ConfirmUser";
+import { MonacoOptions } from "@/components/EditorWrapper";
+import { GPTModels, PromptTypes } from "@/data/PromptTypes";
 import CreateListing from "@/actions/listing/CreateListing";
 import { useUserStore, useWalletStore } from "@/lib/states";
+import GPTCustomization from "@/components/Customizations/GPT";
+import SDXLTurboCustomization from "@/components/Customizations/SDXLTurbo";
 
 import "./sell.scss";
-import GPT from "@/actions/ai/GPT";
-import { MonacoOptions } from "@/components/EditorWrapper";
 
 const llm_example_prompt = [
     {
@@ -30,7 +32,7 @@ const llm_example_prompt = [
     },
     {
         role: "assistant",
-        content: "You can't",
+        content: "1. Build a Strong Foundation\n2. Practice Regularly\n3. Seek Help When Needed",
     },
 ];
 
@@ -40,6 +42,7 @@ export default function Sell() {
     const router = useRouter();
 
     const user = useUserStore(s => s.user);
+    const network = useUserStore(s => s.network);
     const wallet = useWalletStore(s => s.wallet);
     const handler = useWalletStore(s => s.handler);
     const loading = useWalletStore(s => s.loading);
@@ -62,7 +65,7 @@ export default function Sell() {
         useState<keyof (typeof PromptTypes)["types"]>("Stable Diffusion XL Turbo");
     const [promptTitle, setPromptTitle] = useState("");
     const [promptDescription, setPromptDescription] = useState("");
-    const [currency, setCurrency] = useState<"TPR" | "TFUEL">("TPR");
+    const [currency, setCurrency] = useState<"TPR" | "TFUEL">("TFUEL");
     const [promptPrice, setPromptPrice] = useState(0);
 
     // Customization
@@ -76,6 +79,8 @@ export default function Sell() {
     const [promptTypeSelection, setPromptTypeSelection] = useState(false);
 
     useEffect(() => {
+        if (!network) return;
+
         if (handler && wallet) {
             (async () => {
                 try {
@@ -89,7 +94,7 @@ export default function Sell() {
 
                     if (TFUEL_Balance >= 10) {
                         setUnsufficentTFUEL(false);
-                        await ConfirmUser(wallet);
+                        await ConfirmUser(wallet, network);
                     }
 
                     setSellPageLoading(false);
@@ -99,7 +104,7 @@ export default function Sell() {
                 }
             })();
         }
-    }, [wallet, handler]);
+    }, [wallet, handler, network]);
 
     useEffect(() => scrollToPreview, [previewImage]);
 
@@ -156,7 +161,7 @@ export default function Sell() {
     }
 
     async function list() {
-        if (!handler || !wallet) return;
+        if (!handler || !wallet || !network) return;
 
         // Check fields
         if (!promptTitle || !promptPrice) return toast.error("Fill all the necessary fields");
@@ -181,6 +186,7 @@ export default function Sell() {
 
         if (!correspondingPreview) return toast.error("Invalid prompt type");
 
+        toast.loading("Waiting transaction...");
         setPublishingListing(true);
 
         // Send fee transaction
@@ -193,18 +199,21 @@ export default function Sell() {
 
         try {
             hash = await handler.sendTransaction(receiver, value.toString(), message);
+            toast.dismiss();
         } catch (e) {
-            console.error(e);
+            console.log("Transaction error: ", e);
+            toast.dismiss();
             toast.error("Transaction is failed");
             setPublishingListing(false);
             return;
         }
 
         console.log("Hash:", hash);
-
         setSellPageLoading(true);
+
         const listingResponse = await CreateListing(
             wallet,
+            network,
             prompt,
             promptType,
             promptTitle,
@@ -316,172 +325,16 @@ export default function Sell() {
                     </div>
                     <div className="customization">
                         {promptType === "Stable Diffusion XL Turbo" && (
-                            <>
-                                <p>
-                                    Strength: <span>{customization["Stable Diffusion XL Turbo"][0]}</span>
-                                </p>
-                                <input
-                                    type="range"
-                                    id="range_id_0"
-                                    min="0"
-                                    max="1"
-                                    step="0.001"
-                                    aria-label="range slider for Strength"
-                                    value={customization["Stable Diffusion XL Turbo"][0]}
-                                    onChange={e => {
-                                        const c: any = { ...customization };
-                                        c["Stable Diffusion XL Turbo"][0] = parseFloat(e.target.value);
-                                        setCustomization(c);
-                                    }}
-                                />
-
-                                <p>
-                                    Guidance: <span>{customization["Stable Diffusion XL Turbo"][1]}</span>
-                                </p>
-                                <input
-                                    type="range"
-                                    id="range_id_1"
-                                    min="0"
-                                    max="2"
-                                    step="0.001"
-                                    aria-label="range slider for Guidance"
-                                    value={customization["Stable Diffusion XL Turbo"][1]}
-                                    onChange={e => {
-                                        const c: any = { ...customization };
-                                        c["Stable Diffusion XL Turbo"][1] = parseFloat(e.target.value);
-                                        setCustomization(c);
-                                    }}
-                                />
-
-                                <p>
-                                    Steps: <span>{customization["Stable Diffusion XL Turbo"][2]}</span>
-                                </p>
-                                <input
-                                    type="range"
-                                    id="range_id_2"
-                                    min="1"
-                                    max="40"
-                                    step="1"
-                                    aria-label="range slider for Steps"
-                                    value={customization["Stable Diffusion XL Turbo"][2]}
-                                    onChange={e => {
-                                        const c: any = { ...customization };
-                                        c["Stable Diffusion XL Turbo"][2] = parseFloat(e.target.value);
-                                        setCustomization(c);
-                                    }}
-                                />
-
-                                <p>
-                                    Seed: <span>{customization["Stable Diffusion XL Turbo"][3]}</span>
-                                </p>
-                                <input
-                                    type="range"
-                                    id="range_id_3"
-                                    min="0"
-                                    max="12013012031030"
-                                    step="1"
-                                    aria-label="range slider for Seed"
-                                    value={customization["Stable Diffusion XL Turbo"][3]}
-                                    onChange={e => {
-                                        const c: any = { ...customization };
-                                        c["Stable Diffusion XL Turbo"][3] = parseFloat(e.target.value);
-                                        setCustomization(c);
-                                    }}
-                                />
-                            </>
+                            <SDXLTurboCustomization
+                                customization={customization}
+                                setCustomization={setCustomization}
+                            />
                         )}
                         {(promptType as string).startsWith("gpt") && (
-                            <>
-                                <p>
-                                    Max Tokens: <span>{customization["GPT"][0]}</span>
-                                </p>
-                                <input
-                                    type="range"
-                                    id="gpt_range_id_0"
-                                    min="1"
-                                    max="4000"
-                                    step="1"
-                                    aria-label="range slider for Max Tokens"
-                                    value={customization["GPT"][0]}
-                                    onChange={e => {
-                                        const c: any = { ...customization };
-                                        c["GPT"][0] = parseFloat(e.target.value);
-                                        setCustomization(c);
-                                    }}
-                                />
-
-                                <p>
-                                    Temperature: <span>{customization["GPT"][1]}</span>
-                                </p>
-                                <input
-                                    type="range"
-                                    id="gpt_range_id_1"
-                                    min="0"
-                                    max="1"
-                                    step="0.001"
-                                    aria-label="range slider for Temperature"
-                                    value={customization["GPT"][1]}
-                                    onChange={e => {
-                                        const c: any = { ...customization };
-                                        c["GPT"][1] = parseFloat(e.target.value);
-                                        setCustomization(c);
-                                    }}
-                                />
-
-                                <p>
-                                    Top P: <span>{customization["GPT"][2]}</span>
-                                </p>
-                                <input
-                                    type="range"
-                                    id="gpt_range_id_2"
-                                    min="0"
-                                    max="1"
-                                    step="0.001"
-                                    aria-label="range slider for Top P"
-                                    value={customization["GPT"][2]}
-                                    onChange={e => {
-                                        const c: any = { ...customization };
-                                        c["GPT"][2] = parseFloat(e.target.value);
-                                        setCustomization(c);
-                                    }}
-                                />
-
-                                <p>
-                                    Frequency Penalty: <span>{customization["GPT"][3]}</span>
-                                </p>
-                                <input
-                                    type="range"
-                                    id="gpt_range_id_3"
-                                    min="-2"
-                                    max="2"
-                                    step="0.01"
-                                    aria-label="range slider for Frequency Penalty"
-                                    value={customization["GPT"][3]}
-                                    onChange={e => {
-                                        const c: any = { ...customization };
-                                        c["GPT"][3] = parseFloat(e.target.value);
-                                        setCustomization(c);
-                                    }}
-                                />
-
-                                <p>
-                                    Presence Penalty: <span>{customization["GPT"][4]}</span>
-                                </p>
-                                <input
-                                    type="range"
-                                    id="gpt_range_id_4"
-                                    min="-2"
-                                    max="2"
-                                    step="0.01"
-                                    aria-label="range slider for Presence Penalty"
-                                    value={customization["GPT"][4]}
-                                    onChange={e => {
-                                        const c: any = { ...customization };
-                                        c["GPT"][4] = parseFloat(e.target.value);
-                                        setCustomization(c);
-                                    }}
-                                />
-                            </>
+                            <GPTCustomization
+                                customization={customization}
+                                setCustomization={setCustomization}
+                            />
                         )}
                     </div>
                 </div>
@@ -530,13 +383,20 @@ export default function Sell() {
                         <h4>Select Currency</h4>
                         <div className="button-group">
                             <button
-                                className={currency === "TPR" ? "active" : undefined}
-                                onClick={() => setCurrency("TPR")}
+                                className={
+                                    "tpr-button " +
+                                    (currency === "TPR" ? "active " : " ") +
+                                    (network !== "Theta Testnet" ? "disabled" : "")
+                                }
+                                onClick={() => {
+                                    if (network === "Theta Testnet") setCurrency("TPR");
+                                    else toast.error("Currently, TPR is only available for Theta Testnet.");
+                                }}
                             >
                                 <TPR size={30} /> TPR
                             </button>
                             <button
-                                className={currency === "TFUEL" ? "active" : undefined}
+                                className={"tfuel-button " + (currency === "TFUEL" ? "active" : "")}
                                 onClick={() => setCurrency("TFUEL")}
                             >
                                 <TFUEL size={30} /> TFUEL

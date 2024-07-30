@@ -1,6 +1,7 @@
 import { Toaster } from "react-hot-toast";
 
 import Modals from "@/components/Modal/Modals";
+import Network from "./Network";
 import Top from "./Top";
 
 export default function Wrapper({
@@ -12,6 +13,7 @@ export default function Wrapper({
         <>
             <Toaster position="bottom-right" containerClassName="toast-container" />
             <Modals />
+            <Network />
             {children}
             <Top />
         </>

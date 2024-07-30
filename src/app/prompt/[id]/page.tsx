@@ -1,14 +1,13 @@
+import EditorWrapper from "@/components/EditorWrapper";
 import GetListing from "@/actions/listing/GetListing";
+import BuyButton from "@/components/Buy/BuyButton";
 import { GPTModels } from "@/data/PromptTypes";
-import { Editor } from "@monaco-editor/react";
 import TFUEL from "@/components/Coins/TFUEL";
 import { formatDate } from "@/lib/helpers";
-import Button from "@/components/Button";
 import TPR from "@/components/Coins/TPR";
 import NotFound from "@/app/not-found";
 
 import "./prompt.scss";
-import EditorWrapper from "@/components/EditorWrapper";
 
 export default async function PromptPage({ params }: { params: { id: string } }) {
     const listing = await GetListing(params.id);
@@ -57,12 +56,17 @@ export default async function PromptPage({ params }: { params: { id: string } })
 
                 <div className="actions">
                     <div className="price">
-                        <span>{listing.price}</span>
+                        <span>{listing.price.toFixed(2)}</span>
                         {listing.currency}{" "}
                         {listing.currency === "TPR" ? <TPR size={24} /> : <TFUEL size={24} />}
                     </div>
 
-                    <Button type="main">Buy</Button>
+                    <BuyButton
+                        id={params.id}
+                        address={listing.wallet}
+                        amount={listing.price}
+                        currency={listing.currency}
+                    />
                 </div>
             </div>
         </div>

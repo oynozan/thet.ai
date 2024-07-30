@@ -7,6 +7,7 @@ import ConnectButton from "../Connect/ConnectButton";
 
 import "./header.scss";
 import Search from "../Search";
+import NetworkSelection from "../Network/NetworkSelection";
 
 export default function Header() {
     return (
@@ -20,12 +21,12 @@ export default function Header() {
                 <Link href="/sell">Sell</Link>
                 <Link href="/faucet">Faucet</Link>
                 <Link href="/faq">FAQ</Link>
-                <Link href="/whitepaper">Whitepaper</Link>
                 <Link href="/sponsors">Sponsors</Link>
             </div>
 
             <div className="actions">
                 <Search />
+                <NetworkSelection />
                 <ConnectButton />
             </div>
 

@@ -15,7 +15,13 @@ export const MonacoOptions = {
     },
 } as const;
 
-export default function EditorWrapper({ defaultValue }: { defaultValue: string }) {
+export default function EditorWrapper({
+    defaultValue,
+    readOnly = false,
+}: {
+    defaultValue: string;
+    readOnly?: boolean;
+}) {
     const [value, setValue] = useState(defaultValue);
 
     return (
@@ -26,7 +32,7 @@ export default function EditorWrapper({ defaultValue }: { defaultValue: string }
                 onChange={e => {
                     if (e) setValue(e);
                 }}
-                options={MonacoOptions}
+                options={{ ...MonacoOptions, readOnly }}
             />
         </div>
     );

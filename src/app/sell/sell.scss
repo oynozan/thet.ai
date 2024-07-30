@@ -112,7 +112,7 @@
                     color: $dark;
                     background: transparent;
 
-                    &:first-child {
+                    &.tpr-button {
                         border-radius: 12px 0 0 12px;
                         border-right: none;
 
@@ -121,7 +121,7 @@
                             border: 1px solid $green;
                         }
                     }
-                    &:last-child {
+                    &.tfuel-button {
                         border-radius: 0 12px 12px 0;
                         border-left: none;
 
@@ -136,8 +136,15 @@
                         color: rgb(21, 21, 21);
                         font-weight: 700;
                     }
+
                     &:not(.active) {
                         border: 1px solid $border;
+                    }
+
+                    &:disabled,
+                    &.disabled {
+                        cursor: default;
+                        background: rgba(0, 0, 0, 0.1);
                     }
                 }
             }

@@ -1,3 +1,5 @@
+import "./profile.scss";
+
 export default function ProfileLayout({
     children,
 }: Readonly<{

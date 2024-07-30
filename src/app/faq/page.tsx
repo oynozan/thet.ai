@@ -25,7 +25,12 @@ export default function FAQ() {
                 <h3>What is TPR token?</h3>
                 <p>
                     TPR token is an utility token that you can use to buy prompts from{" "}
-                    <Link href="/">thet.ai</Link>. You can swap your TFUELs to TPR on thet.ai.
+                    <Link href="/">thet.ai</Link>. TPR is currently only available on Theta Testnet. A faucet
+                    for TPR is coming very soon.
+                </p>
+                <p>
+                    Contract address:{" "}
+                    <span style={{ color: "#2de3bd" }}>0xdD94af5CC36AA7aDBeE5e22Ea4942e32060FEd72</span>
                 </p>
             </div>
             <div>
@@ -44,6 +49,18 @@ export default function FAQ() {
                     your prompt. This way, we prevent poor prompts to be sold.
                 </p>
                 <p>After you pay a fee with TFUEL or TPR, you are ready to sell.</p>
+            </div>
+            <div>
+                <h3>What about the networks?</h3>
+                <p>There are 2 networks on thet.ai: THETA Mainnet & THETA Testnet</p>
+                <p>
+                    Each account and prompt listing is distinguishable in each network. You can use TPR tokens
+                    in Testnet.
+                </p>
+                <p>
+                    If you create a sale of a prompt on Mainnet, you can&apos;t buy it on Testnet, and vice
+                    versa.
+                </p>
             </div>
             <div>
                 <h3>How can I buy prompts?</h3>
