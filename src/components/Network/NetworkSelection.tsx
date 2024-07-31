@@ -48,7 +48,14 @@ export default function NetworkSelection() {
             handleNetworkChange(null, network);
         } else {
             const localNetwork = localStorage.getItem("network");
-            if (localNetwork && Networks.includes(localNetwork)) setNetwork(localNetwork);
+            if (localNetwork && Networks.includes(localNetwork)) {
+                setNetwork(localNetwork);
+            }
+            else {
+                const defaultNetwork = "Theta Mainnet";
+                localStorage.setItem("network", defaultNetwork);
+                setNetwork(defaultNetwork);
+            }
         }
     }, [user]);
 
